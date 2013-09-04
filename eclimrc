@@ -1,0 +1,5 @@
+# Workspace Directory
+osgi.instance.area.default=/home/brandon/Dev/workspaces
+
+# set the default file encoding
+file.encoding=utf-8
