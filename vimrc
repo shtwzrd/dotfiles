@@ -26,7 +26,8 @@ set nowrap
 set shortmess+=l
 set hidden
 set cursorline
-set rnu
+set relativenumber
+set number
  
 "auto change directory on buffer switch
 autocmd BufEnter * cd %:p:h
