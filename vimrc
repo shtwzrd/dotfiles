@@ -7,6 +7,7 @@ call pathogen#helptags()
 "General
 syntax on
 set nocompatible "this file is not vi compatible
+set shell=/bin/bash
 let mapleader=","
 set encoding=utf-8
 set tabstop=2
@@ -28,14 +29,14 @@ set hidden
 set cursorline
 set relativenumber
 set number
- 
+
 "auto change directory on buffer switch
-autocmd BufEnter * cd %:p:h
+"autocmd BufEnter * cd %:p:h
 
 "Show 80 character column
 let &colorcolumn=join(range(80,900),",")
 
-set fillchars=stl:/
+set fillchars=stl:.
 set listchars=eol:¬,tab:▸\ ,trail:‧
 
 "Search
@@ -61,7 +62,7 @@ noremap <Leader>rq :VimuxCloseRunner<CR>
 noremap <Leader>rs :VimuxInterruptRunner<CR>
 
 "NERDTree  https://github.com/scrooloose/nerdtree
-nnoremap <F7> :NERDTreeToggle<CR>
+nnoremap <F7> :NERDTreeTabsToggle<CR>
 let NERDTreeShowBookmarks=1
 autocmd vimenter * if !argc() | NERDTree | endif "open on start
 " Don't show files with these extensions
@@ -76,11 +77,6 @@ let g:UltiSnipsExpandTrigger = '<c-l>'
 
 "TagBar  https://github.com/majutsushi/tagbar
 nnoremap <F8> :TagbarToggle<CR>
-
-"easy-tags
-let g:easytags_by_filetype='~/Dev/tags'
-let g:easytags_updatetime_warn=0
-let g:easytags_resolve_links=1
 
 "minibufexpl
 let g:miniBufExplMaxSize=1
