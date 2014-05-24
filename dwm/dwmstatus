@@ -1,0 +1,55 @@
+#!/bin/sh
+
+getVolume() {
+  echo -ne "   <span foreground='#b294bb'><big>"
+  MIXER="Master"
+  VOLUME=`amixer sget $MIXER | grep -m 1 -o '[0-9]\+%' | sed 's/%//'`
+  if [ $VOLUME -lt 1 ]; then
+    echo -ne "</big></span> $VOLUME%" 
+  elif [ $VOLUME -lt 30 ]; then
+    echo -ne "</big></span> $VOLUME%"
+  elif [ $VOLUME -lt 90 ]; then
+    echo -ne "</big></span> $VOLUME%"
+  elif [ $VOLUME -gt 89 ]; then
+    echo -ne "</big></span> $VOLUME%"
+  fi
+}
+getMpd() {
+
+  echo -ne "   <span foreground='#f0c674'><big>"
+  if [ "`mpc | grep playing | awk '{ print $2 }' | wc -l`" != 1 ]; then
+    echo -ne "</big></span>  Music Paused"
+  else
+      echo -ne "</big></span> `mpc | head -n 1 |cut -c 1-200`"
+      mpc_time="`mpc | grep playing | awk '{ print $3 }'`"
+      echo -ne " [$mpc_time]" 
+  fi
+}
+
+getBattery() {
+
+  BAT_FULL=$(cat /sys/class/power_supply/BAT0/energy_full)
+  RCAP=$(cat /sys/class/power_supply/BAT0/energy_now)
+
+  echo -ne "   <big><span " 
+  # calculate remaining power
+  RPERCT=`expr $RCAP \* 100`;
+  RPERC=`expr $RPERCT / $BAT_FULL`;
+
+  if   [[ $RPERC -lt 10 ]]; then
+    echo -ne "foreground='#cc6666'></span></big> $RPERC% "
+    send-notify Low Battery
+  elif [[ $RPERC -lt 30 ]]; then
+    echo -ne "foreground='#f0c674'></span></big> $RPERC% " 
+  elif [[ $RPERC -lt 50 ]]; then
+    echo -ne "foreground='#b5bd68'></span></big> $RPERC% "  
+  elif [[ $RPERC -lt 80 ]]; then
+    echo -ne "foreground='#b5bd68'></span></big> $RPERC% "    
+  elif [[ $RPERC -lt 100 ]]; then
+    echo -ne "foreground='#b5bd68'></span></big> $RPERC% "     
+  else
+    echo -ne "foreground='#b5bd68'></span></big> $RPERC% "      
+  fi
+}
+
+xsetroot -name "$(getMpd)$(getVolume)$(getBattery)" 

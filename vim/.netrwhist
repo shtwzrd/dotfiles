@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/brandon/.kde4/env'
-let g:netrw_dirhist_2='/home/brandon/.kde4/share/apps/konsole'
-let g:netrw_dirhist_3='/home/brandon/.kde4/env'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/brandon/dev/workspaces/Battleship/server/src/main/java/edu'
+let g:netrw_dirhist_2='/home/brandon/dev/workspaces/Battleship/server/src/main/java/edu/kea'
+let g:netrw_dirhist_3='/home/brandon/dev/workspaces/Battleship/server/src/main/java/edu/kea/battleship'
+let g:netrw_dirhist_4='/home/brandon/dev/workspaces/Battleship/server/src/main/java/edu/kea/battleship/net'
+let g:netrw_dirhist_5='/home/brandon/dev/workspaces/adventureXP/data'

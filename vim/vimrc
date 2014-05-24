@@ -6,7 +6,7 @@ call pathogen#helptags()
 
 "General
 syntax on
-set nocompatible "this file is not vi compatible
+set nocompatible
 set shell=/bin/bash
 let mapleader=","
 set encoding=utf-8
@@ -22,7 +22,6 @@ set synmaxcol=2048
 set shellslash
 set scrolloff=6
 set sidescrolloff=6
-set ch=2 "two line commandline
 set nowrap
 set shortmess+=l
 set hidden
@@ -50,8 +49,17 @@ set guioptions=acg
 set mousehide
 
 "colorsheme
+let base16colorspace=256
 set background=dark
-colorscheme solarized
+colorscheme base16-tomorrow
+
+"java highlighting
+let java_highlight_java_lang_ids=1
+let java_highlight_all=1
+let java_highlight_functions="style"
+
+"gradle highlighting
+au BufNewFile,BufRead *.gradle setf groovy
 
 "vimux
 noremap <Leader>! :VimuxPromptCommand<CR>
@@ -60,14 +68,6 @@ noremap <Leader>ri :VimuxInspectRunner<CR>
 noremap <Leader>rx :VimuxClosePanes<CR>
 noremap <Leader>rq :VimuxCloseRunner<CR>
 noremap <Leader>rs :VimuxInterruptRunner<CR>
-
-"NERDTree  https://github.com/scrooloose/nerdtree
-nnoremap <F7> :NERDTreeTabsToggle<CR>
-let NERDTreeShowBookmarks=1
-autocmd vimenter * if !argc() | NERDTree | endif "open on start
-" Don't show files with these extensions
-let NERDTreeIgnore=[ '\.suo', '\.obj$', '\.ico',
-                    \ '\.png', '\.db', '\.userprefs', '\.swp' ]
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -78,9 +78,12 @@ let g:UltiSnipsExpandTrigger = '<c-l>'
 "TagBar  https://github.com/majutsushi/tagbar
 nnoremap <F8> :TagbarToggle<CR>
 
-"minibufexpl
-let g:miniBufExplMaxSize=1
-let g:miniBufExplStatusLineText="-"
-
 "eclimd
 let g:EclimCompletionMethod = 'omnifunc'
+
+"YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+
+"Emmet
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
