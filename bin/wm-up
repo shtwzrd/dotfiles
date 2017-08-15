@@ -1,0 +1,21 @@
+#!/bin/sh
+
+[[ $DISPLAY ]] || DISPLAY=":0"
+
+export DISPLAY
+echo $DISPLAY
+
+# Figure out current VT, or default to 1.
+[[ $XDG_VTNR ]] && vt="$XDG_VTNR" || vt="1"
+
+XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-/run/user/$UID}
+
+#xorgopts="$DISPLAY"
+xorgopts="vt$vt"
+xorgopts="$xorgopts --noreset"
+xorgopts="$xorgopts --nolisten tcp"
+xorgopts="$xorgopts -modulepath /run/current-system/profile/lib/xorg/modules"
+
+echo "$xorgopts"
+
+exec xinit "~/.xinitrc" "$@" -- "$xorgopts"
